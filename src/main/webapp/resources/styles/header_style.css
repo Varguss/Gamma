@@ -1,0 +1,84 @@
+@import url("discord-button-style.css");
+
+@font-face {
+	font-family: Arial;
+}
+
+body {
+	margin: 0;
+}
+
+/** Лого сайта **/
+#logo {
+	position: relative;
+	margin: 0 auto;
+	display: block;
+
+	height: 15%;
+}
+
+/** Меню **/
+#header-menu {
+	width: 100%;
+	height: 5%;
+	line-height: 40px;
+	
+	position: relative;
+	
+	flex-direction: row;
+	display: flex;
+	justify-content: space-between;
+	align-items: stretch;
+
+	outline: 5px solid black;
+
+	background-color: black;
+}
+
+/* Блоки меню */
+.header-menu-item {
+	display: block;
+	
+	text-align: center;
+	
+	flex-grow: 1;
+	
+	border: 2px solid black;
+	
+	transition: background-color 500ms, color 250ms;
+	background-color: #FFF;
+	
+	text-decoration: none;
+	color: black;
+	font-size: 1.6em;
+
+	border-radius: 10px;
+}
+
+.header-menu-item:hover {
+	color:#FFF;
+}
+
+#header-menu-home-box:hover {
+	background-color: #FF7100;
+}
+
+#header-menu-banhub-box:hover {
+	background-color: #0067FF;
+}
+
+#header-menu-rules-box:hover {
+	background-color: #FF5555;
+}
+
+#header-menu-contact-box:hover {
+	background-color: #DCFF7F;
+}
+
+#header-menu-wikipedia-box:hover {
+	background-color: #DC143C;
+}
+
+#header-menu-monitoring-box:hover {
+	background-color: #6495ED;
+}

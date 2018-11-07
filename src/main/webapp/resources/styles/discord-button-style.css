@@ -1,0 +1,24 @@
+#discord-button {
+	position: relative;
+
+	transition: transform 600ms;
+
+	width: 100px;
+}
+
+#discord-button:hover {
+	transform: rotate(360deg);
+	-webkit-transform: rotate(360deg);
+}
+
+#discord-button-wrapper {
+	position: fixed;
+	
+	right: 2%;
+	bottom: 2%;
+	background-color: #DDDCDC;
+
+	border-radius: 50%;
+	-moz-border-radius: 50%;
+	-webkit-border-radius: 50%;
+}

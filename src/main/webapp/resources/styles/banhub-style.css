@@ -1,0 +1,18 @@
+.ban {
+    background-color: #333333 !important;
+    color: white !important;
+}
+
+.ban:hover {
+    color: #333333 !important;
+    background-color: white !important;
+}
+
+@media all and (min-height:1000px) {
+    .ban-row {
+        line-height: 100px;
+        min-height: 100px;
+        height: 100px;
+    }
+}
+
