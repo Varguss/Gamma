@@ -92,7 +92,7 @@
 
         <div class="flex-content">
             <div class="article" style="width:100%">
-                <table class="ban-table" style="color:white;" border="3px" cellpadding="3px">
+                <table class="ban-table" style="color:white;" border="1px" cellpadding="3px">
                     <tr>
                         <th>Director</th>
                     </tr>
@@ -106,7 +106,7 @@
                 </table>
                 <!-- Cut here -->
                 <div class="lesser-manifest-container">
-                    <table class="ban-table lesser-manifest-table" style="color:white;" border="3px" cellpadding="3px">
+                    <table class="ban-table lesser-manifest-table" style="color:white;" border="1px" cellpadding="3px">
                         <tr>
                             <th>Game Master</th>
                         </tr>
@@ -118,7 +118,7 @@
                             </c:forEach>
                         </tr>
                     </table>
-                    <table class="ban-table lesser-manifest-table" style="color:white;" border="3px" cellpadding="3px">
+                    <table class="ban-table lesser-manifest-table" style="color:white;" border="1px" cellpadding="3px">
                         <tr>
                             <th>Game Admin</th>
                         </tr>
@@ -130,7 +130,7 @@
                             </c:forEach>
                         </tr>
                     </table>
-                    <table class="ban-table lesser-manifest-table" style="color:white;" border="3px" cellpadding="3px">
+                    <table class="ban-table lesser-manifest-table" style="color:white;" border="1px" cellpadding="3px">
                         <tr>
                             <th>Admin</th>
                         </tr>
@@ -142,7 +142,7 @@
                             </c:forEach>
                         </tr>
                     </table>
-                    <table class="ban-table lesser-manifest-table" style="color:white;" border="3px" cellpadding="3px">
+                    <table class="ban-table lesser-manifest-table" style="color:white;" border="1px" cellpadding="3px">
                         <tr>
                             <th>Admin Candidate</th>
                         </tr>
@@ -154,7 +154,7 @@
                             </c:forEach>
                         </tr>
                     </table>
-                    <table class="ban-table lesser-manifest-table" style="color:white;" border="3px" cellpadding="3px">
+                    <table class="ban-table lesser-manifest-table" style="color:white;" border="1px" cellpadding="3px">
                         <tr>
                             <th>Wiki</th>
                         </tr>
@@ -167,7 +167,7 @@
                 </div>
                 <!-- And cut here -->
                 <div class="lesser-manifest-container">
-                    <table class="ban-table lesser-manifest-table" style="color:white;" border="3px" cellpadding="3px">
+                    <table class="ban-table lesser-manifest-table" style="color:white;" border="1px" cellpadding="3px">
                         <tr>
                             <th>Coder</th>
                         </tr>
@@ -179,7 +179,7 @@
                             </c:forEach>
                         </tr>
                     </table>
-                    <table class="ban-table lesser-manifest-table" style="color:white;" border="3px" cellpadding="3px">
+                    <table class="ban-table lesser-manifest-table" style="color:white;" border="1px" cellpadding="3px">
                         <tr>
                             <th>Mapper</th>
                         </tr>
@@ -191,7 +191,7 @@
                             </c:forEach>
                         </tr>
                     </table>
-                    <table class="ban-table lesser-manifest-table" style="color:white;" border="3px" cellpadding="3px">
+                    <table class="ban-table lesser-manifest-table" style="color:white;" border="1px" cellpadding="3px">
                         <tr>
                             <th>Mentor</th>
                         </tr>
@@ -203,7 +203,7 @@
                             </c:forEach>
                         </tr>
                     </table>
-                    <table class="ban-table lesser-manifest-table" style="color:white;" border="3px" cellpadding="3px">
+                    <table class="ban-table lesser-manifest-table" style="color:white;" border="1px" cellpadding="3px">
                         <tr>
                             <th>Spriter</th>
                         </tr>
@@ -213,7 +213,7 @@
                             </c:if>
                         </c:forEach>
                     </table>
-                    <table class="ban-table lesser-manifest-table" style="color:white;" border="3px" cellpadding="3px">
+                    <table class="ban-table lesser-manifest-table" style="color:white;" border="1px" cellpadding="3px">
                         <tr>
                             <th>Xenovisor</th>
                         </tr>

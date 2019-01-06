@@ -69,18 +69,9 @@ create table IF NOT EXISTS website_rules
   DESCRIPTION text not null
 ) engine=MyISAM CHARSET = UTF8;
 
-# create table IF NOT EXISTS website_visitors
-# (
-#   IP_ADDRESS varchar(18) not null
-#     primary key,
-#   LAST_HOST varchar(24) not null,
-#   LAST_VISIT timestamp default CURRENT_TIMESTAMP not null on update CURRENT_TIMESTAMP,
-#   VISITS int(12) not null
-# ) engine=MyISAM CHARSET = UTF8;
-
 CREATE TABLE IF NOT EXISTS website_visitors (
-  IP_ADDRESS VARCHAR(36) NOT NULL,
-  LAST_HOST VARCHAR(255) NOT NULL,
+  IP_ADDRESS VARCHAR(36) PRIMARY KEY,
+  LAST_HOST VARCHAR(64) NOT NULL,
   LAST_VISIT TIMESTAMP NOT NULL,
   VISITS BIGINT(16) NOT NULL
-) CHARSET = UTF8;
+) ENGINE=MyISAM CHARSET = UTF8;

@@ -194,43 +194,43 @@
             <input type="submit" value="Удалить!" />
         </form>
 
-        <h3>Добавить роль участника</h3>
-        <form action="<c:url value="/admin/removeCrew"/>" method="POST">
-            <label>Имя члена состава: <input type="text" required name="name" /></label> <br/>
+        <%--<h3>Добавить роль участника</h3>--%>
+        <%--<form action="<c:url value="/admin/removeCrew"/>" method="POST">--%>
+            <%--<label>Имя члена состава: <input type="text" required name="name" /></label> <br/>--%>
 
-            <label>Директор? <input type="radio" name="role" value="director"/></label> <br/>
-            <label>Game Master? <input type="radio" name="role" value="gm"/></label> <br/>
-            <label>Game Admin? <input type="radio" name="role" value="ga"/></label> <br/>
-            <label>Admin? <input type="radio" name="role" value="admin"/></label> <br/>
-            <label>Admin Candidate? <input type="radio" name="role" value="admin_candidate"/></label> <br/>
-            <label>Wiki-редактор? <input type="radio" name="role" value="wiki"/></label> <br/>
-            <label>Кодер? <input type="radio" name="role" value="coder"/></label> <br/>
-            <label>Маппер? <input type="radio" name="role" value="mapper"/></label> <br/>
-            <label>Ментор? <input type="radio" name="role" value="mentor"/></label> <br/>
-            <label>Спрайтер? <input type="radio" name="role" value="spriter"/></label> <br/>
-            <label>Ксеновизор? <input type="radio" name="role" value="xenovisor"/></label> <br/>
+            <%--<label>Директор? <input type="radio" name="role" value="director"/></label> <br/>--%>
+            <%--<label>Game Master? <input type="radio" name="role" value="gm"/></label> <br/>--%>
+            <%--<label>Game Admin? <input type="radio" name="role" value="ga"/></label> <br/>--%>
+            <%--<label>Admin? <input type="radio" name="role" value="admin"/></label> <br/>--%>
+            <%--<label>Admin Candidate? <input type="radio" name="role" value="admin_candidate"/></label> <br/>--%>
+            <%--<label>Wiki-редактор? <input type="radio" name="role" value="wiki"/></label> <br/>--%>
+            <%--<label>Кодер? <input type="radio" name="role" value="coder"/></label> <br/>--%>
+            <%--<label>Маппер? <input type="radio" name="role" value="mapper"/></label> <br/>--%>
+            <%--<label>Ментор? <input type="radio" name="role" value="mentor"/></label> <br/>--%>
+            <%--<label>Спрайтер? <input type="radio" name="role" value="spriter"/></label> <br/>--%>
+            <%--<label>Ксеновизор? <input type="radio" name="role" value="xenovisor"/></label> <br/>--%>
 
-            <input type="submit" value="Добавить роль!" />
-        </form>
+            <%--<input type="submit" value="Добавить роль!" />--%>
+        <%--</form>--%>
 
-        <h3>Удалить роль участника</h3>
-        <form action="<c:url value="/admin/removeCrew"/>" method="POST">
-            <label>Имя члена состава: <input type="text" required name="name" /></label> <br/>
+        <%--<h3>Удалить роль участника</h3>--%>
+        <%--<form action="<c:url value="/admin/removeCrew"/>" method="POST">--%>
+            <%--<label>Имя члена состава: <input type="text" required name="name" /></label> <br/>--%>
 
-            <label>Директор? <input type="radio" name="director" value="director"/></label> <br/>
-            <label>Game Master? <input type="radio" name="role" value="gm"/></label> <br/>
-            <label>Game Admin? <input type="radio" name="role" value="ga"/></label> <br/>
-            <label>Admin? <input type="radio" name="role" value="admin"/></label> <br/>
-            <label>Admin Candidate? <input type="radio" name="role" value="admin_candidate"/></label> <br/>
-            <label>Wiki-редактор? <input type="radio" name="role" value="wiki"/></label> <br/>
-            <label>Кодер? <input type="radio" name="role" value="coder"/></label> <br/>
-            <label>Маппер? <input type="radio" name="role" value="mapper"/></label> <br/>
-            <label>Ментор? <input type="radio" name="role" value="mentor"/></label> <br/>
-            <label>Спрайтер? <input type="radio" name="role" value="spriter"/></label> <br/>
-            <label>Ксеновизор? <input type="radio" name="role" value="xeno_visor"/></label> <br/>
+            <%--<label>Директор? <input type="radio" name="director" value="director"/></label> <br/>--%>
+            <%--<label>Game Master? <input type="radio" name="role" value="gm"/></label> <br/>--%>
+            <%--<label>Game Admin? <input type="radio" name="role" value="ga"/></label> <br/>--%>
+            <%--<label>Admin? <input type="radio" name="role" value="admin"/></label> <br/>--%>
+            <%--<label>Admin Candidate? <input type="radio" name="role" value="admin_candidate"/></label> <br/>--%>
+            <%--<label>Wiki-редактор? <input type="radio" name="role" value="wiki"/></label> <br/>--%>
+            <%--<label>Кодер? <input type="radio" name="role" value="coder"/></label> <br/>--%>
+            <%--<label>Маппер? <input type="radio" name="role" value="mapper"/></label> <br/>--%>
+            <%--<label>Ментор? <input type="radio" name="role" value="mentor"/></label> <br/>--%>
+            <%--<label>Спрайтер? <input type="radio" name="role" value="spriter"/></label> <br/>--%>
+            <%--<label>Ксеновизор? <input type="radio" name="role" value="xeno_visor"/></label> <br/>--%>
 
-            <input type="submit" value="Удалить роль!" />
-        </form>
+            <%--<input type="submit" value="Удалить роль!" />--%>
+        <%--</form>--%>
     </section>
 
     <section class="statistics">
