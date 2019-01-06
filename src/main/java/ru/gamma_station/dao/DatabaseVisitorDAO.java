@@ -54,7 +54,7 @@ public class DatabaseVisitorDAO implements VisitorDAO, InitializingBean {
                     jdbcTemplate.update("UPDATE website_visitors SET LAST_HOST = ? WHERE IP_ADDRESS = ?", lastHost, ipAddress);
                 }
             } else {
-                jdbcTemplate.update("INSERT INTO website_visitors(IP_ADDRESS, LAST_HOST, LAST_VISIT, VISITS) VALUES (?, ?, ?, ?)", ipAddress, lastHost, lastVisit, 0L);
+                jdbcTemplate.update("INSERT INTO website_visitors(IP_ADDRESS, LAST_HOST, LAST_VISIT, VISITS) VALUES (?, ?, ?, ?)", ipAddress, lastHost, lastVisit, 1L);
             }
         } catch (DataAccessException e) {
             throw new DAOException("Query is failed.", e);
