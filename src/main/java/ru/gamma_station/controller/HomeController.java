@@ -6,17 +6,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import ru.gamma_station.dao.DAOException;
-import ru.gamma_station.dao.PostDAO;
 import ru.gamma_station.domain.Post;
-import ru.gamma_station.domain.website.AdminAuthority;
-import ru.gamma_station.domain.website.Authority;
-import ru.gamma_station.service.AdminService;
 import ru.gamma_station.service.PostService;
+import ru.gamma_station.util.ServerStatusUtil;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashSet;
+import java.io.IOException;
 import java.util.List;
 
 @Controller
@@ -31,6 +25,13 @@ public class HomeController {
 
     @GetMapping
     public String home(Model model) {
+        model.addAttribute("posts", service.getAllPosts());
+        try {
+            model.addAttribute("gamma", ServerStatusUtil.getGammaStationServerStatus());
+            model.addAttribute("eris", ServerStatusUtil.getErisStationServerStatus());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return "home";
     }
 

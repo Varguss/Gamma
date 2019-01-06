@@ -3,7 +3,6 @@ package ru.gamma_station.domain;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -18,6 +17,8 @@ public class CrewMember {
     private String name;
 
     @ElementCollection(targetClass = CrewMemberRole.class, fetch = FetchType.EAGER)
+    @CollectionTable(name = "crewMember_Roles", joinColumns = @JoinColumn(name = "crewMemberName"))
+    @OrderColumn
     @Enumerated(EnumType.STRING)
     private Set<CrewMemberRole> roles;
 }

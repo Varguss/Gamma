@@ -12,28 +12,49 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import ru.gamma_station.dao.*;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Properties;
 
 @Configuration
 @EnableTransactionManagement
 public class DatabaseConfig {
-    @Bean(name = "dataSource", destroyMethod = "close")
-    public BasicDataSource getDatabaseDataSource() throws IOException {
+    @Bean(name = "gammaDataSource", destroyMethod = "close")
+    public BasicDataSource getGammaDatabaseSource() throws IOException {
         BasicDataSource databaseDataSource = new BasicDataSource();
 
         Properties properties = new Properties();
 
         ClassPathResource propertiesFileResource = new ClassPathResource("database.properties");
-        properties.load(propertiesFileResource.getInputStream());
+        try (InputStream stream = propertiesFileResource.getInputStream()) {
+            properties.load(stream);
+        }
 
-        databaseDataSource.setDriverClassName(properties.getProperty("jdbc.driverClassName"));
-        databaseDataSource.setUrl(properties.getProperty("jdbc.url"));
-        databaseDataSource.setUsername(properties.getProperty("jdbc.username"));
-        databaseDataSource.setPassword(properties.getProperty("jdbc.password"));
+        databaseDataSource.setDriverClassName(properties.getProperty("gamma.driverClassName"));
+        databaseDataSource.setUrl(properties.getProperty("gamma.url"));
+        databaseDataSource.setUsername(properties.getProperty("gamma.username"));
+        databaseDataSource.setPassword(properties.getProperty("gamma.password"));
 
         return databaseDataSource;
     }
 
+    @Bean(name = "erisDataSource", destroyMethod = "close")
+    public BasicDataSource getErisDatabaseSource() throws IOException {
+        BasicDataSource databaseDataSource = new BasicDataSource();
+
+        Properties properties = new Properties();
+
+        ClassPathResource propertiesFileResource = new ClassPathResource("database.properties");
+        try (InputStream stream = propertiesFileResource.getInputStream()) {
+            properties.load(stream);
+        }
+
+        databaseDataSource.setDriverClassName(properties.getProperty("eris.driverClassName"));
+        databaseDataSource.setUrl(properties.getProperty("eris.url"));
+        databaseDataSource.setUsername(properties.getProperty("eris.username"));
+        databaseDataSource.setPassword(properties.getProperty("eris.password"));
+
+        return databaseDataSource;
+    }
 
     @Autowired
     @Bean(name = "transactionManager")
@@ -44,7 +65,7 @@ public class DatabaseConfig {
     @Bean(name = "sessionFactory")
     public LocalSessionFactoryBean getSessionFactory() throws IOException {
         LocalSessionFactoryBean sessionFactoryBean = new LocalSessionFactoryBean();
-        sessionFactoryBean.setDataSource(getDatabaseDataSource());
+        sessionFactoryBean.setDataSource(getGammaDatabaseSource());
         sessionFactoryBean.setPackagesToScan("ru.gamma_station.domain", "ru.gamma_station.domain.website");
 
         Properties properties = new Properties();
@@ -60,18 +81,19 @@ public class DatabaseConfig {
         return sessionFactoryBean;
     }
 
-    @Bean("banEntityDAO")
-    public BanDAO getBanEntityDAO() throws IOException {
-        return new DatabaseBanDAO(getDatabaseDataSource());
+
+    @Bean("gammaBanEntityDAO")
+    public BanDAO getGammaBanDAO() throws IOException {
+        return new DatabaseGammaBanDAO(getGammaDatabaseSource());
     }
 
     @Bean("postEntityDAO")
-    public PostDAO getPostEntityDAO() {
+    public PostDAO getPostDAO() {
         return new DatabasePostDAO();
     }
 
     @Bean("ruleEntityDAO")
-    public RuleDAO getRuleEntityDAO() {
+    public RuleDAO getRuleDAO() {
         return new DatabaseRuleDAO();
     }
 
@@ -87,6 +109,6 @@ public class DatabaseConfig {
 
     @Bean("visitorEntityDAO")
     public VisitorDAO getVisitorEntityDAO() throws IOException {
-        return new DatabaseVisitorDAO(getDatabaseDataSource());
+        return new DatabaseVisitorDAO(getGammaDatabaseSource());
     }
 }

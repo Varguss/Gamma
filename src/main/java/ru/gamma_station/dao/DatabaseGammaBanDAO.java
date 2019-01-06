@@ -6,6 +6,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.SQLErrorCodeSQLExceptionTranslator;
 import org.springframework.stereotype.Repository;
 import ru.gamma_station.domain.Ban;
+import ru.gamma_station.domain.GammaBan;
 import ru.gamma_station.util.PropertiesUtil;
 
 import javax.sql.DataSource;
@@ -14,11 +15,11 @@ import java.sql.Time;
 import java.util.List;
 
 @Repository
-public class DatabaseBanDAO implements BanDAO, InitializingBean {
+public class DatabaseGammaBanDAO implements BanDAO, InitializingBean {
     private DataSource dataSource;
     private JdbcTemplate jdbcTemplate;
 
-    public DatabaseBanDAO(DataSource dataSource) {
+    public DatabaseGammaBanDAO(DataSource dataSource) {
         setDataSource(dataSource);
     }
 
@@ -40,14 +41,14 @@ public class DatabaseBanDAO implements BanDAO, InitializingBean {
             return jdbcTemplate.query("SELECT bantime, bantype, reason, duration, expiration_time, ckey, a_ckey, adminwho FROM erro_ban WHERE (bantype='TEMPBAN' OR bantype='PERMABAN') AND ckey = ? AND TIMEDIFF(now(), bantime) >= ? ORDER BY bantime DESC",
                     new Object[]{ckey.toLowerCase(), new Time(new java.util.Date().getTime()+PropertiesUtil.getBanDelay())},
                     (resultSet, rowNum) -> {
-                        Ban ban = new Ban();
+                        GammaBan gammaBan = new GammaBan();
 
-                        ban.setCkey(ckey.toLowerCase());
-                        ban.setAdminCkey(resultSet.getString("a_ckey"));
-                        ban.setAdminsWasOnline(resultSet.getString("adminwho"));
-                        ban.setBanTime(resultSet.getTimestamp("bantime"));
-                        ban.setDurationTime(resultSet.getInt("duration"));
-                        ban.setExpirationTime(resultSet.getTimestamp("expiration_time"));
+                        gammaBan.setCkey(ckey.toLowerCase());
+                        gammaBan.setAdminCkey(resultSet.getString("a_ckey"));
+                        gammaBan.setAdminsWasOnline(resultSet.getString("adminwho"));
+                        gammaBan.setTime(resultSet.getTimestamp("bantime"));
+                        gammaBan.setDuration(resultSet.getInt("duration"));
+                        gammaBan.setExpirationTime(resultSet.getTimestamp("expiration_time"));
 
                         String reason;
                         try {
@@ -58,9 +59,9 @@ public class DatabaseBanDAO implements BanDAO, InitializingBean {
                             e.printStackTrace();
                         }
 
-                        ban.setReason(fixReason(reason));
+                        gammaBan.setReason(fixReason(reason));
 
-                        return ban;
+                        return gammaBan;
                     });
         } catch (DataAccessException e) {
             throw new DAOException("Query execution is failed.", e);
@@ -73,14 +74,14 @@ public class DatabaseBanDAO implements BanDAO, InitializingBean {
             return jdbcTemplate.query("SELECT bantime, bantype, reason, duration, expiration_time, ckey, a_ckey, adminwho FROM erro_ban WHERE (bantype='TEMPBAN' OR bantype='PERMABAN') AND a_ckey = ? AND TIMEDIFF(now(), bantime) >= ? ORDER BY bantime DESC",
                     new Object[]{adminCkey.toLowerCase(), new Time(new java.util.Date().getTime()+PropertiesUtil.getBanDelay())},
                     (resultSet, rowNum) -> {
-                        Ban ban = new Ban();
+                        GammaBan gammaBan = new GammaBan();
 
-                        ban.setAdminCkey(adminCkey.toLowerCase());
-                        ban.setCkey(resultSet.getString("ckey"));
-                        ban.setAdminsWasOnline(resultSet.getString("adminwho"));
-                        ban.setBanTime(resultSet.getTimestamp("bantime"));
-                        ban.setDurationTime(resultSet.getInt("duration"));
-                        ban.setExpirationTime(resultSet.getTimestamp("expiration_time"));
+                        gammaBan.setAdminCkey(adminCkey.toLowerCase());
+                        gammaBan.setCkey(resultSet.getString("ckey"));
+                        gammaBan.setAdminsWasOnline(resultSet.getString("adminwho"));
+                        gammaBan.setTime(resultSet.getTimestamp("bantime"));
+                        gammaBan.setDuration(resultSet.getInt("duration"));
+                        gammaBan.setExpirationTime(resultSet.getTimestamp("expiration_time"));
 
                         String reason;
                         try {
@@ -91,9 +92,9 @@ public class DatabaseBanDAO implements BanDAO, InitializingBean {
                             e.printStackTrace();
                         }
 
-                        ban.setReason(fixReason(reason));
+                        gammaBan.setReason(fixReason(reason));
 
-                        return ban;
+                        return gammaBan;
                     });
         } catch (DataAccessException e) {
             throw new DAOException("Query execution is failed.", e);
@@ -106,15 +107,15 @@ public class DatabaseBanDAO implements BanDAO, InitializingBean {
             return jdbcTemplate.query("SELECT bantime, bantype, reason, job, duration, expiration_time, ckey, a_ckey, adminwho FROM erro_ban WHERE (bantype='JOB_TEMPBAN' OR bantype='JOB_PERMABAN') AND ckey = ? AND TIMEDIFF(now(), bantime) >= ? ORDER BY bantime DESC",
                     new Object[]{ckey.toLowerCase(), new Time(new java.util.Date().getTime()+PropertiesUtil.getBanDelay())},
                     (resultSet, rowNum) -> {
-                        Ban ban = new Ban();
+                        GammaBan gammaBan = new GammaBan();
 
-                        ban.setCkey(ckey.toLowerCase());
-                        ban.setAdminCkey(resultSet.getString("a_ckey"));
-                        ban.setAdminsWasOnline(resultSet.getString("adminwho"));
-                        ban.setBanTime(resultSet.getTimestamp("bantime"));
-                        ban.setDurationTime(resultSet.getInt("duration"));
-                        ban.setExpirationTime(resultSet.getTimestamp("expiration_time"));
-                        ban.setJob(resultSet.getString("job"));
+                        gammaBan.setCkey(ckey.toLowerCase());
+                        gammaBan.setAdminCkey(resultSet.getString("a_ckey"));
+                        gammaBan.setAdminsWasOnline(resultSet.getString("adminwho"));
+                        gammaBan.setTime(resultSet.getTimestamp("bantime"));
+                        gammaBan.setDuration(resultSet.getInt("duration"));
+                        gammaBan.setExpirationTime(resultSet.getTimestamp("expiration_time"));
+                        gammaBan.setJob(resultSet.getString("job"));
 
                         String reason;
                         try {
@@ -125,9 +126,9 @@ public class DatabaseBanDAO implements BanDAO, InitializingBean {
                             e.printStackTrace();
                         }
 
-                        ban.setReason(fixReason(reason));
+                        gammaBan.setReason(fixReason(reason));
 
-                        return ban;
+                        return gammaBan;
                     });
         } catch (DataAccessException e) {
             throw new DAOException("Query execution is failed.", e);
@@ -140,15 +141,15 @@ public class DatabaseBanDAO implements BanDAO, InitializingBean {
             return jdbcTemplate.query("SELECT bantime, bantype, reason, job, duration, expiration_time, ckey, a_ckey, adminwho FROM erro_ban WHERE (bantype='JOB_TEMPBAN' OR bantype='JOB_PERMABAN') AND a_ckey = ? AND TIMEDIFF(now(), bantime) >= ? ORDER BY bantime DESC",
                     new Object[]{adminCkey.toLowerCase(), new Time(new java.util.Date().getTime()+PropertiesUtil.getBanDelay())},
                     (resultSet, rowNum) -> {
-                        Ban ban = new Ban();
+                        GammaBan gammaBan = new GammaBan();
 
-                        ban.setAdminCkey(adminCkey.toLowerCase());
-                        ban.setCkey(resultSet.getString("ckey"));
-                        ban.setAdminsWasOnline(resultSet.getString("adminwho"));
-                        ban.setBanTime(resultSet.getTimestamp("bantime"));
-                        ban.setDurationTime(resultSet.getInt("duration"));
-                        ban.setExpirationTime(resultSet.getTimestamp("expiration_time"));
-                        ban.setJob(resultSet.getString("job"));
+                        gammaBan.setAdminCkey(adminCkey.toLowerCase());
+                        gammaBan.setCkey(resultSet.getString("ckey"));
+                        gammaBan.setAdminsWasOnline(resultSet.getString("adminwho"));
+                        gammaBan.setTime(resultSet.getTimestamp("bantime"));
+                        gammaBan.setDuration(resultSet.getInt("duration"));
+                        gammaBan.setExpirationTime(resultSet.getTimestamp("expiration_time"));
+                        gammaBan.setJob(resultSet.getString("job"));
 
                         String reason;
                         try {
@@ -159,9 +160,9 @@ public class DatabaseBanDAO implements BanDAO, InitializingBean {
                             e.printStackTrace();
                         }
 
-                        ban.setReason(fixReason(reason));
+                        gammaBan.setReason(fixReason(reason));
 
-                        return ban;
+                        return gammaBan;
                     });
         } catch (DataAccessException e) {
             throw new DAOException("Query execution is failed.", e);
@@ -174,18 +175,18 @@ public class DatabaseBanDAO implements BanDAO, InitializingBean {
             return jdbcTemplate.query("SELECT bantime, bantype, reason, job, duration, expiration_time, ckey, a_ckey, adminwho FROM erro_ban WHERE ckey = ? AND TIMEDIFF(now(), bantime) >= ? ORDER BY bantime DESC",
                     new Object[]{ckey.toLowerCase(), new Time(new java.util.Date().getTime()+PropertiesUtil.getBanDelay())},
                     (resultSet, rowNum) -> {
-                        Ban ban = new Ban();
+                        GammaBan gammaBan = new GammaBan();
 
-                        ban.setCkey(ckey.toLowerCase());
-                        ban.setAdminCkey(resultSet.getString("a_ckey"));
-                        ban.setAdminsWasOnline(resultSet.getString("adminwho"));
-                        ban.setBanTime(resultSet.getTimestamp("bantime"));
-                        ban.setDurationTime(resultSet.getInt("duration"));
-                        ban.setExpirationTime(resultSet.getTimestamp("expiration_time"));
+                        gammaBan.setCkey(ckey.toLowerCase());
+                        gammaBan.setAdminCkey(resultSet.getString("a_ckey"));
+                        gammaBan.setAdminsWasOnline(resultSet.getString("adminwho"));
+                        gammaBan.setTime(resultSet.getTimestamp("bantime"));
+                        gammaBan.setDuration(resultSet.getInt("duration"));
+                        gammaBan.setExpirationTime(resultSet.getTimestamp("expiration_time"));
 
                         String job = resultSet.getString("job");
                         if (!job.isEmpty())
-                            ban.setJob(job);
+                            gammaBan.setJob(job);
 
                         String reason;
                         try {
@@ -196,9 +197,9 @@ public class DatabaseBanDAO implements BanDAO, InitializingBean {
                             e.printStackTrace();
                         }
 
-                        ban.setReason(fixReason(reason));
+                        gammaBan.setReason(fixReason(reason));
 
-                        return ban;
+                        return gammaBan;
                     });
         } catch (DataAccessException e) {
             throw new DAOException("Query execution is failed.", e);
@@ -211,18 +212,18 @@ public class DatabaseBanDAO implements BanDAO, InitializingBean {
             return jdbcTemplate.query("SELECT bantime, bantype, reason, job, duration, expiration_time, ckey, a_ckey, adminwho FROM erro_ban WHERE a_ckey = ? AND TIMEDIFF(now(), bantime) >= ? ORDER BY bantime DESC",
                     new Object[]{adminCkey.toLowerCase(), new Time(new java.util.Date().getTime()+PropertiesUtil.getBanDelay())},
                     (resultSet, rowNum) -> {
-                        Ban ban = new Ban();
+                        GammaBan gammaBan = new GammaBan();
 
-                        ban.setAdminCkey(adminCkey.toLowerCase());
-                        ban.setCkey(resultSet.getString("ckey"));
-                        ban.setAdminsWasOnline(resultSet.getString("adminwho"));
-                        ban.setBanTime(resultSet.getTimestamp("bantime"));
-                        ban.setDurationTime(resultSet.getInt("duration"));
-                        ban.setExpirationTime(resultSet.getTimestamp("expiration_time"));
+                        gammaBan.setAdminCkey(adminCkey.toLowerCase());
+                        gammaBan.setCkey(resultSet.getString("ckey"));
+                        gammaBan.setAdminsWasOnline(resultSet.getString("adminwho"));
+                        gammaBan.setTime(resultSet.getTimestamp("bantime"));
+                        gammaBan.setDuration(resultSet.getInt("duration"));
+                        gammaBan.setExpirationTime(resultSet.getTimestamp("expiration_time"));
 
                         String job = resultSet.getString("job");
                         if (!job.isEmpty())
-                            ban.setJob(job);
+                            gammaBan.setJob(job);
 
                         String reason;
                         try {
@@ -233,8 +234,8 @@ public class DatabaseBanDAO implements BanDAO, InitializingBean {
                             e.printStackTrace();
                         }
 
-                        ban.setReason(fixReason(reason));
-                        return ban;
+                        gammaBan.setReason(fixReason(reason));
+                        return gammaBan;
                     });
         } catch (DataAccessException e) {
             throw new DAOException("Query execution is failed.", e);

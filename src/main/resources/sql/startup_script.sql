@@ -10,9 +10,9 @@ create table IF NOT EXISTS crewmember
 
 create table IF NOT EXISTS crewmember_roles
 (
-  CrewMember_name varchar(255) not null,
+  CrewMemberName varchar(255) not null,
   roles varchar(255) null,
-  foreign key (CrewMember_name) references crewmember (name)
+  foreign key (CrewMemberName) references crewmember (name)
 ) CHARSET = UTF8;
 
 create table IF NOT EXISTS hibernate_sequence
@@ -69,14 +69,14 @@ create table IF NOT EXISTS website_rules
   DESCRIPTION text not null
 ) engine=MyISAM CHARSET = UTF8;
 
-create table IF NOT EXISTS website_visitors
-(
-  IP_ADDRESS varchar(18) not null
-    primary key,
-  LAST_HOST varchar(24) not null,
-  LAST_VISIT timestamp default CURRENT_TIMESTAMP not null on update CURRENT_TIMESTAMP,
-  VISITS int(12) not null
-) engine=MyISAM CHARSET = UTF8;
+# create table IF NOT EXISTS website_visitors
+# (
+#   IP_ADDRESS varchar(18) not null
+#     primary key,
+#   LAST_HOST varchar(24) not null,
+#   LAST_VISIT timestamp default CURRENT_TIMESTAMP not null on update CURRENT_TIMESTAMP,
+#   VISITS int(12) not null
+# ) engine=MyISAM CHARSET = UTF8;
 
 CREATE TABLE IF NOT EXISTS website_visitors (
   IP_ADDRESS VARCHAR(36) NOT NULL,
