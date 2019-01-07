@@ -12,6 +12,7 @@ import ru.gamma_station.util.ServerStatusUtil;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Random;
 
 @Controller
 @RequestMapping("/")
@@ -26,6 +27,7 @@ public class HomeController {
     @GetMapping
     public String home(Model model) {
         model.addAttribute("posts", service.getAllPosts());
+        model.addAttribute("random", new Random());
         try {
             model.addAttribute("gamma", ServerStatusUtil.getGammaStationServerStatus());
             model.addAttribute("eris", ServerStatusUtil.getErisStationServerStatus());

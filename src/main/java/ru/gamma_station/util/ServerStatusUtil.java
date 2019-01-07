@@ -8,6 +8,7 @@ import ru.gamma_station.domain.Player;
 import ru.gamma_station.domain.ServerStatus;
 
 import java.io.IOException;
+import java.net.SocketTimeoutException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +16,13 @@ public class ServerStatusUtil {
 
     // http://www.byond.com/games/exadv1/spacestation13
     public static ServerStatus getGammaStationServerStatus() throws IOException {
-        Document document = Jsoup.connect("http://www.byond.com/games/exadv1/spacestation13").get();
+        Document document;
+        try {
+            document = Jsoup.connect("http://www.byond.com/games/exadv1/spacestation13").get();
+        } catch (SocketTimeoutException e) {
+            return new ServerStatus();
+        }
+
         Elements elements = document.select(".live_game_entry");
 
         ServerStatus serverStatus = new ServerStatus();
@@ -94,7 +101,13 @@ public class ServerStatusUtil {
     }
 
     public static ServerStatus getErisStationServerStatus() throws IOException {
-        Document document = Jsoup.connect("http://www.byond.com/games/exadv1/spacestation13").get();
+        Document document;
+        try {
+            document = Jsoup.connect("http://www.byond.com/games/exadv1/spacestation13").get();
+        } catch (SocketTimeoutException e) {
+            return new ServerStatus();
+        }
+
         Elements elements = document.select(".live_game_entry");
 
         ServerStatus serverStatus = new ServerStatus();

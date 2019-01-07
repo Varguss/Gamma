@@ -16,6 +16,8 @@
     <!-- Root Context: defines shared resources visible to all other web components -->
     <context:annotation-config/>
 
+    <context:component-scan base-package="ru.gamma_station.discord" />
+
     <bean name="DBConfig" class="ru.gamma_station.config.DatabaseConfig"/>
     <bean name="securityConfig" class="ru.gamma_station.config.SecurityConfig"/>
 

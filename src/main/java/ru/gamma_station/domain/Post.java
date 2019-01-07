@@ -27,17 +27,22 @@ public class Post implements Serializable {
     @NotEmpty
     private String content;
 
+    private Long discordMessageId;
+
     @Temporal(TemporalType.TIMESTAMP)
     @Column(columnDefinition = "TIMESTAMP")
     private Date publishedDate;
-
-    public Post(String content) {
-        this.content = content;
-    }
 
     public Post(String author, String content, Date publishedDate) {
         this.author = author;
         this.content = content;
         this.publishedDate = publishedDate;
+    }
+
+    public Post(String author, String content, Date publishedDate, Long discordMessageId) {
+        this.author = author;
+        this.content = content;
+        this.publishedDate = publishedDate;
+        this.discordMessageId = discordMessageId;
     }
 }

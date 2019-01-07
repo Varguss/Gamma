@@ -33,9 +33,10 @@ create table IF NOT EXISTS post
 (
   id bigint not null
     primary key,
-  author text null,
-  content text null,
-  publishedDate timestamp default CURRENT_TIMESTAMP not null on update CURRENT_TIMESTAMP
+  author text not null,
+  content text not null,
+  publishedDate timestamp default CURRENT_TIMESTAMP not null on update CURRENT_TIMESTAMP,
+  discordMessageId bigint(20)
 ) CHARSET = UTF8;
 
 create table IF NOT EXISTS rule

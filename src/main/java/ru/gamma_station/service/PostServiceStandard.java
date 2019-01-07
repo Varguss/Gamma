@@ -25,8 +25,24 @@ public class PostServiceStandard implements PostService {
     }
 
     @Override
+    public void editDiscordPost(Long discordMessageId, String content) {
+        List<Post> posts = dao.getAllPosts();
+
+        for (Post post : posts) {
+            if (post.getDiscordMessageId() != null && post.getDiscordMessageId().equals(discordMessageId)) {
+                post.setContent(validateContent(content));
+            }
+        }
+    }
+
+    @Override
     public void addPost(String postAuthor, String postContent) {
         dao.createPost(new Post(postAuthor, validateContent(postContent), new Date()));
+    }
+
+    @Override
+    public void addDiscordPost(String author, String content, Long discordMessageId) {
+        dao.createPost(new Post(author, validateContent(content), new Date(), discordMessageId));
     }
 
     @Override
@@ -35,6 +51,18 @@ public class PostServiceStandard implements PostService {
 
         if (post != null)
             dao.deletePost(post);
+    }
+
+    @Override
+    public void deleteDiscordPost(Long discordMessageId) {
+        List<Post> posts = dao.getAllPosts();
+
+        for (Post post : posts) {
+            if (post.getDiscordMessageId() != null && post.getDiscordMessageId().equals(discordMessageId)) {
+                dao.deletePost(post);
+                break;
+            }
+        }
     }
 
     @Override

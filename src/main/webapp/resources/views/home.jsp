@@ -32,8 +32,8 @@
                     <div class="dropdown">
                         <a class="lang dropbtn" key="bans">Баны</a>
                         <div class="dropdown-content">
-                            <a href="<c:url value="/banhub/gamma/player"/>">Режим "Игрок"</a>
-                            <a href="<c:url value="/banhub/gamma/admin"/>">Режим "Админ"</a>
+                            <a href="<c:url value="/banhub/gamma/player"/>">Поиск по игроку</a>
+                            <a href="<c:url value="/banhub/gamma/admin"/>">Поиск по администратору</a>
                         </div>
                     </div>
                 </li>
@@ -93,12 +93,13 @@
 
         <div class="flex-content">
             <jsp:useBean id="posts" scope="request" type="java.util.List<ru.gamma_station.domain.Post>"/>
+            <jsp:useBean id="random" scope="request" type="java.util.Random" />
             <c:forEach items="${posts}" var="post">
                 <div class="article article-margin announce">
                     <div class="user-wrapper">
                         <div class="avatar">
                             <img class="placeholder"
-                                 src="http://tinygraphs.com/squares/0.6222129281049887?theme=heatwave">
+                                 src="http://tinygraphs.com/squares/${random.nextDouble()}?theme=seascape">
                         </div>
                         <h2>${post.author}</h2>
                         <br>

@@ -5,8 +5,11 @@ import ru.gamma_station.domain.Post;
 import java.util.List;
 
 public interface PostService {
-    void editPost(Long postId, String newContent);
-    void addPost(String postAuthor, String postContent);
-    void deletePost(Long postId);
+    void editPost(Long id, String content);
+    void editDiscordPost(Long discordMessageId, String content);
+    void addDiscordPost(String author, String content, Long discordMessageId);
+    void addPost(String author, String content);
+    void deletePost(Long id);
+    void deleteDiscordPost(Long discordMessageId);
     List<Post> getAllPosts();
 }

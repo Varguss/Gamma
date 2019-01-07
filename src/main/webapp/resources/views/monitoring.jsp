@@ -31,8 +31,8 @@
                     <div class="dropdown">
                         <a class="lang dropbtn" key="bans">Баны</a>
                         <div class="dropdown-content">
-                            <a href="<c:url value="/banhub/gamma/player"/>">Режим "Игрок"</a>
-                            <a href="<c:url value="/banhub/gamma/admin"/>">Режим "Админ"</a>
+                            <a href="<c:url value="/banhub/gamma/player"/>">Поиск по игроку</a>
+                            <a href="<c:url value="/banhub/gamma/admin"/>">Поиск по администратору</a>
                         </div>
                     </div>
                 </li>
