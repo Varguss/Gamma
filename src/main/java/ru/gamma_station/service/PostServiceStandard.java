@@ -26,13 +26,9 @@ public class PostServiceStandard implements PostService {
 
     @Override
     public void editDiscordPost(Long discordMessageId, String content) {
-        List<Post> posts = dao.getAllPosts();
-
-        for (Post post : posts) {
-            if (post.getDiscordMessageId() != null && post.getDiscordMessageId().equals(discordMessageId)) {
-                post.setContent(validateContent(content));
-            }
-        }
+        Post post = findDiscordPost(discordMessageId);
+        if (post != null)
+            post.setContent(validateContent(content));
     }
 
     @Override
@@ -55,20 +51,34 @@ public class PostServiceStandard implements PostService {
 
     @Override
     public void deleteDiscordPost(Long discordMessageId) {
-        List<Post> posts = dao.getAllPosts();
-
-        for (Post post : posts) {
-            if (post.getDiscordMessageId() != null && post.getDiscordMessageId().equals(discordMessageId)) {
-                dao.deletePost(post);
-                break;
-            }
-        }
+        Post post = findDiscordPost(discordMessageId);
+        if (post != null)
+            dao.deletePost(post);
     }
 
     @Override
     @Transactional(readOnly = true)
     public List<Post> getAllPosts() {
         return dao.getAllPosts();
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Post findDiscordPost(Long discordMessageId) {
+        List<Post> posts = getAllPosts();
+
+        for (Post post : posts) {
+            if (post.getDiscordMessageId() != null && post.getDiscordMessageId().equals(discordMessageId))
+                return post;
+        }
+
+        return null;
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Post findPost(Long id) {
+        return dao.findPost(id);
     }
 
     private String validateContent(String content) {

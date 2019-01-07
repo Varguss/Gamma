@@ -14,8 +14,7 @@ import org.springframework.stereotype.Component;
 import ru.gamma_station.service.PostService;
 import ru.gamma_station.util.MarkdownUtil;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.List;
 
 @Component
 public class MessageListener extends ListenerAdapter implements InitializingBean {
@@ -73,6 +72,4 @@ public class MessageListener extends ListenerAdapter implements InitializingBean
             }
         }
     }
-
-
 }

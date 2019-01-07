@@ -108,7 +108,7 @@ public class MarkdownUtil {
 
         String result = markdownText;
         while (matcher.find()) {
-            result = matcher.replaceFirst("<b><i>" + matcher.group(1) + "</i></b>");
+            result = matcher.replaceFirst("<b><i><u>" + matcher.group(1) + "</u></i></b>");
         }
 
         return result;
