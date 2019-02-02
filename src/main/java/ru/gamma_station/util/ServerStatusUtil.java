@@ -12,7 +12,7 @@ import java.net.SocketTimeoutException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ServerStatusUtil {
+public abstract class ServerStatusUtil {
 
     // http://www.byond.com/games/exadv1/spacestation13
     public static ServerStatus getGammaStationServerStatus() throws IOException {

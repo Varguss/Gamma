@@ -3,7 +3,7 @@ package ru.gamma_station.util;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class MarkdownUtil {
+public abstract class MarkdownUtil {
     public static String translateMarkdownTextToHTML(String markdownText) {
         String result = translateMarkdownBoldCursiveUnderlineToHTML(markdownText);
 
