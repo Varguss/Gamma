@@ -6,7 +6,7 @@ services:
      - "8080:8080"
 
   mysql:
-    image: mysql:8.0.15
+    image: mysql:5.7.25
         restart: always
         environment:
           MYSQL_DATABASE: 'tgstation'
