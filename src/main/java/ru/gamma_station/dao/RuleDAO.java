@@ -5,9 +5,9 @@ import ru.gamma_station.domain.Rule;
 import java.util.List;
 
 public interface RuleDAO {
-    Rule findRule(String name);
-    void saveRule(Rule rule);
-    void deleteRule(Rule rule);
+    Rule find(String name);
+    void save(Rule rule);
+    void delete(Rule rule);
 
-    List<Rule> getAllRules();
+    List<Rule> getAll();
 }

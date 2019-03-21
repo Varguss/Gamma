@@ -43,10 +43,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.
-                    authorizeRequests().antMatchers("/admin").authenticated()
+                    authorizeRequests()
+                .antMatchers("/admin").authenticated()
                 .antMatchers("/admin/addAdmin", "/admin/removeAdmin", "/admin/removeAuthority", "/admin/addAuthority")
                 .hasAuthority("STAFF_MANAGEMENT")
-                .antMatchers("/admin/addPost", "/admin/removePost", "/admin/editPost")
+                .antMatchers("/admin/save", "/admin/removePost", "/admin/edit")
                 .hasAuthority("POSTS_MANAGEMENT")
                 .antMatchers("/admin/addRule", "/admin/removeRule", "/admin/editRule")
                 .hasAuthority("RULES_MANAGEMENT")

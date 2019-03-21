@@ -6,11 +6,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
+import org.springframework.orm.jpa.JpaTransactionManager;
+import org.springframework.orm.jpa.JpaVendorAdapter;
+import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
+import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
+import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import ru.gamma_station.dao.*;
 
+import javax.persistence.EntityManagerFactory;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
@@ -56,17 +63,24 @@ public class DatabaseConfig {
         return databaseDataSource;
     }
 
-    @Autowired
-    @Bean(name = "transactionManager")
-    public HibernateTransactionManager getTransactionManager(SessionFactory sessionFactory) {
-        return new HibernateTransactionManager(sessionFactory);
+    @Bean
+    public PersistenceExceptionTranslationPostProcessor exceptionTranslation(){
+        return new PersistenceExceptionTranslationPostProcessor();
     }
 
-    @Bean(name = "sessionFactory")
-    public LocalSessionFactoryBean getSessionFactory() throws IOException {
-        LocalSessionFactoryBean sessionFactoryBean = new LocalSessionFactoryBean();
-        sessionFactoryBean.setDataSource(getGammaDatabaseSource());
-        sessionFactoryBean.setPackagesToScan("ru.gamma_station.domain", "ru.gamma_station.domain.website");
+    @Bean
+    public PlatformTransactionManager transactionManager(EntityManagerFactory emf){
+        JpaTransactionManager transactionManager = new JpaTransactionManager();
+        transactionManager.setEntityManagerFactory(emf);
+
+        return transactionManager;
+    }
+
+    @Bean
+    public LocalContainerEntityManagerFactoryBean entityManagerFactory() throws IOException {
+        LocalContainerEntityManagerFactoryBean emf = new LocalContainerEntityManagerFactoryBean();
+        emf.setDataSource(getGammaDatabaseSource());
+        emf.setPackagesToScan("ru.gamma_station.domain", "ru.gamma_station.domain.website");
 
         Properties properties = new Properties();
         properties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL57Dialect");
@@ -76,39 +90,40 @@ public class DatabaseConfig {
         properties.setProperty("hibernate.connection.characterEncoding", "utf8");
         properties.setProperty("hibernate.connection.charSet", "utf8");
 
-        sessionFactoryBean.setHibernateProperties(properties);
+        JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
+        emf.setJpaVendorAdapter(vendorAdapter);
+        emf.setJpaProperties(properties);
 
-        return sessionFactoryBean;
+        return emf;
     }
 
-
-    @Bean("gammaBanEntityDAO")
+    @Bean("gammaBanDAO")
     public BanDAO getGammaBanDAO() throws IOException {
         return new DatabaseGammaBanDAO(getGammaDatabaseSource());
     }
 
-    @Bean("postEntityDAO")
-    public PostDAO getPostDAO() {
-        return new DatabasePostDAO();
+    @Bean("erisBanDAO")
+    public BanDAO getErisBanDAO() throws IOException {
+        return new DatabaseErisBanDAO(getErisDatabaseSource());
     }
-
-    @Bean("ruleEntityDAO")
-    public RuleDAO getRuleDAO() {
-        return new DatabaseRuleDAO();
-    }
-
-    @Bean("adminDAO")
-    public AdminDAO getAdminDAO() {
-        return new DatabaseAdminDAO();
-    }
-
-    @Bean("crewMemberDAO")
-    public CrewMemberDAO getCrewMemberDAO() {
-        return new DatabaseCrewMemberDAO();
-    }
-
-    @Bean("visitorEntityDAO")
-    public VisitorDAO getVisitorEntityDAO() throws IOException {
-        return new DatabaseVisitorDAO(getGammaDatabaseSource());
-    }
+//
+//    @Bean("ruleEntityDAO")
+//    public RuleDAO getRuleDAO() {
+//        return new DatabaseRuleDAO();
+//    }
+//
+//    @Bean("adminDAO")
+//    public AdminDAO getAdminDAO() {
+//        return new DatabaseAdminDAO();
+//    }
+//
+//    @Bean("crewMemberDAO")
+//    public CrewMemberDAO getCrewMemberDAO() {
+//        return new DatabaseCrewMemberDAO();
+//    }
+//
+//    @Bean("visitorEntityDAO")
+//    public VisitorDAO getVisitorEntityDAO() throws IOException {
+//        return new DatabaseVisitorDAO(getGammaDatabaseSource());
+//    }
 }

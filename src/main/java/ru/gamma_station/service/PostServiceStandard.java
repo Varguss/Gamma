@@ -1,9 +1,11 @@
 package ru.gamma_station.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.gamma_station.dao.PostDAO;
+import ru.gamma_station.dao.PostRepository;
 import ru.gamma_station.domain.Post;
 
 import java.util.Date;
@@ -12,16 +14,16 @@ import java.util.List;
 @Service
 @Transactional
 public class PostServiceStandard implements PostService {
-    private PostDAO dao;
+    private PostRepository repository;
 
     @Autowired
-    public PostServiceStandard(PostDAO dao) {
-        this.dao = dao;
+    public PostServiceStandard(PostRepository repository) {
+        this.repository = repository;
     }
 
     @Override
-    public void editPost(Long postId, String newContent) {
-        dao.findPost(postId).setContent(validateContent(newContent));
+    public void edit(Long postId, String newContent) {
+        repository.findById(postId).ifPresent(post1 -> post1.setContent(validateContent(newContent)));
     }
 
     @Override
@@ -32,40 +34,43 @@ public class PostServiceStandard implements PostService {
     }
 
     @Override
-    public void addPost(String postAuthor, String postContent) {
-        dao.createPost(new Post(postAuthor, validateContent(postContent), new Date()));
+    public void save(String postAuthor, String postContent) {
+        repository.save(new Post(postAuthor, validateContent(postContent), new Date()));
     }
 
     @Override
-    public void addDiscordPost(String author, String content, Long discordMessageId) {
-        dao.createPost(new Post(author, validateContent(content), new Date(), discordMessageId));
+    public void saveDiscordPost(String author, String content, Long discordMessageId) {
+        repository.save(new Post(author, validateContent(content), new Date(), discordMessageId));
     }
 
     @Override
-    public void deletePost(Long postId) {
-        Post post = dao.findPost(postId);
-
-        if (post != null)
-            dao.deletePost(post);
+    public void delete(Long postId) {
+        repository.findById(postId).ifPresent(repository::delete);
     }
 
     @Override
     public void deleteDiscordPost(Long discordMessageId) {
         Post post = findDiscordPost(discordMessageId);
         if (post != null)
-            dao.deletePost(post);
+            repository.delete(post);
     }
 
     @Override
     @Transactional(readOnly = true)
-    public List<Post> getAllPosts() {
-        return dao.getAllPosts();
+    public List<Post> getAll() {
+        return repository.findAll();
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<Post> getPage(int page, int size) {
+        return repository.findAll(PageRequest.of(page, size)).getContent();
     }
 
     @Override
     @Transactional(readOnly = true)
     public Post findDiscordPost(Long discordMessageId) {
-        List<Post> posts = getAllPosts();
+        List<Post> posts = getAll();
 
         for (Post post : posts) {
             if (post.getDiscordMessageId() != null && post.getDiscordMessageId().equals(discordMessageId))
@@ -77,8 +82,8 @@ public class PostServiceStandard implements PostService {
 
     @Override
     @Transactional(readOnly = true)
-    public Post findPost(Long id) {
-        return dao.findPost(id);
+    public Post find(Long id) {
+        return repository.findById(id).orElse(null);
     }
 
     private String validateContent(String content) {

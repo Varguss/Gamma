@@ -227,7 +227,7 @@
         return "string" != typeof n ? n : (/^['"].*['"]$/.test(n) && (n = n.slice(1, -1)), /["'() \t\n]/.test(n) ? '"' + n.replace(/"/g, '\\"').replace(/\n/g, "\\n") + '"' : n)
     }
 }, function (n, t, e) {
-    n.exports = e.p + "/resources/assets/854fbb661911b7f8f2039b64ff3d1cc6.png"
+    n.exports = e.p + "/Gamma/resources/assets/854fbb661911b7f8f2039b64ff3d1cc6.png"
 }, function (n, t, e) {
     "use strict";
     e.r(t);
@@ -274,9 +274,9 @@
     var r = e(2);
     (n.exports = e(0)(!1)).push([n.i, ".server-icon {\n    width: 100px;\n    margin: 30px 40px;\n    background-image: url(" + r(e(12)) + ");\n    background-repeat: no-repeat;\n    background-position: center;\n}\n.offline {\n    background-image: url(" + r(e(13)) + ") !important;\n}\n.lesser-manifest-table {\n    width: 20%;\n    min-width: 170px;\n}\n.lesser-manifest-container {\n    display: flex;\n    justify-content: center;\n}\n.lesser-manifest-table td {\n    display: block;\n}\n", ""])
 }, function (n, t, e) {
-    n.exports = e.p + "/resources/assets/8a856a2f03ef3dd81ebb6b221e619cbb.svg"
+    n.exports = e.p + "/Gamma/resources/assets/8a856a2f03ef3dd81ebb6b221e619cbb.svg"
 }, function (n, t, e) {
-    n.exports = e.p + "/resources/assets/ab77299f6bebebb890f6d770e101eb78.svg"
+    n.exports = e.p + "/Gamma/resources/assets/ab77299f6bebebb890f6d770e101eb78.svg"
 }, function (n, t, e) {
     var r = e(15);
     "string" == typeof r && (r = [[n.i, r, ""]]);
@@ -287,9 +287,9 @@
     var r = e(2);
     (n.exports = e(0)(!1)).push([n.i, "@-webkit-keyframes parallaxAnimation {\n    from {\n        background-position: 0 0;\n    }\n    to {\n        background-position: -960px 0;\n    }\n}\n\n@keyframes parallaxAnimation {\n    from {\n        background-position: 0 0;\n    }\n    to {\n        background-position: -960px 0;\n    }\n}\n\n.layer1, .layer2 {\n    position: fixed;\n    width: 100%;\n    height: 100%;\n    top: 0;\n    left: 0;\n    background-repeat: repeat;\n    z-index: -999;\n}\n\n.layer1 {\n    background-image: url(" + r(e(16)) + ");\n    -webkit-animation: parallaxAnimation 100s linear infinite;\n            animation: parallaxAnimation 100s linear infinite;\n}\n.layer2 {\n    background-image: url(" + r(e(17)) + ");\n    -webkit-animation: parallaxAnimation 50s linear infinite;\n            animation: parallaxAnimation 50s linear infinite;\n}\n\n", ""])
 }, function (n, t, e) {
-    n.exports = e.p + "/resources/assets/4128654496152aea967970201a23227b.png"
+    n.exports = e.p + "/Gamma/resources/assets/4128654496152aea967970201a23227b.png"
 }, function (n, t, e) {
-    n.exports = e.p + "/resources/assets/3558acbeaf7005412ee361882358eece.png"
+    n.exports = e.p + "/Gamma/resources/assets/3558acbeaf7005412ee361882358eece.png"
 }, function (n, t, e) {
     var r = e(19);
     "string" == typeof r && (r = [[n.i, r, ""]]);

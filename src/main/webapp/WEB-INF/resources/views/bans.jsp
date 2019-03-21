@@ -1,12 +1,12 @@
-<html>
 <%@ page contentType="text/html; UTF-8;" language="java" %>
 
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
+<html>
 <head>
-    <title>Gamma-Eris Stations</title>
+    <title>Gamma - Bans</title>
 
     <meta name="description" content="News and Updates for Eris Gamma." style/>
     <meta name="keywords" content="ss13, space station 13"/>
@@ -15,11 +15,8 @@
     <meta charset="UTF-8"/>
 
     <link rel="stylesheet" type="text/css" href="https://cdnjs.com/libraries/10up-sanitize.css"/>
-    <link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/dropdown.css"/>"/>
 </head>
-
 <body>
-
 <div class="flex-layout">
     <div class="layer1"></div>
     <div class="layer2"></div>
@@ -27,17 +24,16 @@
     <header>
         <div class="nav">
             <ul>
-                <li><a href="<c:url value="/" />" class="lang" key="home" id="active">Главная</a></li>
+                <li><a href="<c:url value="/" />" class="lang" key="home">Главная</a></li>
                 <li>
                     <div class="dropdown">
-                        <a class="lang dropbtn" key="bans">Баны</a>
+                        <a class="lang dropbtn" key="bans" id="active">Баны</a>
                         <div class="dropdown-content">
                             <a href="<c:url value="/banhub/gamma/player"/>">Поиск по игроку</a>
                             <a href="<c:url value="/banhub/gamma/admin"/>">Поиск по администратору</a>
                         </div>
                     </div>
                 </li>
-                    <%--<a href="<c:url value="/banhub/player" />" class="lang" key="bans">Баны</a></li>--%>
                 <li><a href="<c:url value="/crew" />" class="lang" key="monitor">Состав</a></li>
                 <%--<li><a href="<c:url value="resources/views/wikipedia.html" />" class="lang" key="wiki">Вики</a></li>--%>
             </ul>
@@ -92,32 +88,46 @@
         </div>
 
         <div class="flex-content">
-            <jsp:useBean id="posts" scope="request" type="java.util.List<ru.gamma_station.domain.Post>"/>
-            <jsp:useBean id="random" scope="request" type="java.util.Random" />
-            <c:forEach items="${posts}" var="post">
-                <div class="article article-margin announce">
-                    <div class="user-wrapper">
-                        <div class="avatar">
-                            <img class="placeholder"
-                                 src="http://tinygraphs.com/squares/${random.nextDouble()}?theme=seascape">
-                        </div>
-                        <h2>${post.author}</h2>
-                        <br>
-                        <h3>Опубликовано: <br>${post.publishedDate.toString().substring(0, post.publishedDate.toString().length() - 2)}</h3>
-                        <h3>ID: ${post.id}</h3>
-                    </div>
+            <div class="article ban-search">
+                <form>
+                    <input type="text" name="ckey" placeholder="CKey" />
+                    <input type="checkbox" class="ban-checkbox" id="jobban" name="jobban" />
+                        <label for="jobban" >Show job bans?</label>
+                    <%--<span class="ban-span">--%>
 
-                    <div class="announce-content">
-                            ${post.content}
-                    </div>
-                </div>
-            </c:forEach>
+                    <%--</span>--%>
+                </form>
+            </div>
+            <div class="article article-margin ban-container" >
+
+                <table class="ban-table" cellspacing="0" cellpadding="3px" border="3px">
+                    <tr>
+                        <th>CKey</th>
+                        <th>Администратор</th>
+                        <th>Длительность</th>
+                        <th>Истекает</th>
+                        <th>Должность</th>
+                        <th>Причина</th>
+                    </tr>
+
+                    <c:forEach items="${bans}" var="ban">
+                        <tr>
+                            <td>${ban.ckey}</td>
+                            <td>${ban.adminCkey}</td>
+                            <td>${ban.duration == -1 ? "PERMAMENT" : ban.duration}</td>
+                            <td>${ban.expirationTime.toString().substring(0, ban.expirationTime.toString().length() - 2)}</td>
+                            <td>${ban.job}</td>
+                            <td>${ban.reason}</td>
+                        </tr>
+                    </c:forEach>
+                </table>
+            </div>
         </div>
 
         <div class="flex-sidebar-right"></div>
     </div>
 </div>
-
-<script type="text/javascript" src="<spring:url value="/resources/scripts/index_bundle.js?69a2bfd76050f2d39948" />"></script>
+    <script type="text/javascript"
+            src="<spring:url value="/resources/scripts/index_bundle.js?69a2bfd76050f2d39948" />"></script>
 </body>
 </html>

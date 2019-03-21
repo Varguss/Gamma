@@ -1,10 +1,8 @@
 package ru.gamma_station.service;
 
-import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.gamma_station.dao.DatabaseRuleDAO;
 import ru.gamma_station.dao.RuleDAO;
 import ru.gamma_station.domain.Rule;
 
@@ -23,31 +21,31 @@ public class RuleServiceStandard implements RuleService {
     @Override
     @Transactional(readOnly = true)
     public Rule findRule(String ruleName) {
-        return dao.findRule(ruleName);
+        return dao.find(ruleName);
     }
 
     @Override
     public void addRule(String name, String description) {
-        dao.saveRule(new Rule(name, validateDescription(description)));
+        dao.save(new Rule(name, validateDescription(description)));
     }
 
     @Override
     public void deleteRule(String name) {
-        Rule rule = dao.findRule(name);
+        Rule rule = dao.find(name);
 
         if (rule != null)
-            dao.deleteRule(rule);
+            dao.delete(rule);
     }
 
     @Override
     public void editRule(String name, String description) {
-        dao.findRule(name).setDescription(validateDescription(description));
+        dao.find(name).setDescription(validateDescription(description));
     }
 
     @Override
     @Transactional(readOnly = true)
     public List<Rule> getAllRules() {
-        return dao.getAllRules();
+        return dao.getAll();
     }
 
     private String validateDescription(String description) {

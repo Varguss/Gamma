@@ -26,7 +26,7 @@ public class HomeController {
 
     @GetMapping
     public String home(Model model) {
-        model.addAttribute("posts", service.getAllPosts());
+        model.addAttribute("posts", service.getAll());
         model.addAttribute("random", new Random());
         try {
             model.addAttribute("gamma", ServerStatusUtil.getGammaStationServerStatus());
@@ -39,6 +39,6 @@ public class HomeController {
 
     @ModelAttribute(name = "posts")
     public List<Post> addPosts() {
-        return service.getAllPosts();
+        return service.getAll();
     }
 }

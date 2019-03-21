@@ -1,6 +1,7 @@
 package ru.gamma_station.dao;
 
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.SQLErrorCodeSQLExceptionTranslator;
@@ -19,7 +20,7 @@ public class DatabaseGammaBanDAO implements BanDAO, InitializingBean {
     private DataSource dataSource;
     private JdbcTemplate jdbcTemplate;
 
-    public DatabaseGammaBanDAO(DataSource dataSource) {
+    public DatabaseGammaBanDAO(@Qualifier("gammaDataSource") DataSource dataSource) {
         setDataSource(dataSource);
     }
 

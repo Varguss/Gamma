@@ -26,8 +26,6 @@
     <meta charset="UTF-8" />
 </head>
 <body>
-    <jsp:include page="/resources/templates/header.html" />
-
     <div class="rules-container">
         <c:forEach var="rule" items="${rules}">
             <div class="rule-container">

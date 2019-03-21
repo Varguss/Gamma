@@ -23,25 +23,25 @@ public class CrewMemberServiceStandard implements CrewMemberService {
     @Override
     @Transactional(readOnly = true)
     public CrewMember getMember(String name) {
-        return dao.findCrewMember(name);
+        return dao.find(name);
     }
 
     @Override
     public void addMember(String name, Set<CrewMemberRole> roles) {
-        dao.saveCrewMember(new CrewMember(name, roles));
+        dao.save(new CrewMember(name, roles));
     }
 
     @Override
     public void removeMember(String name) {
-        CrewMember member = dao.findCrewMember(name);
+        CrewMember member = dao.find(name);
 
         if (member != null)
-            dao.deleteCrewMember(member);
+            dao.delete(member);
     }
 
     @Override
     public void addRole(String name, CrewMemberRole role) {
-        CrewMember member = dao.findCrewMember(name);
+        CrewMember member = dao.find(name);
 
         if (member != null)
             member.getRoles().add(role);
@@ -49,7 +49,7 @@ public class CrewMemberServiceStandard implements CrewMemberService {
 
     @Override
     public void removeRole(String name, CrewMemberRole role) {
-        CrewMember member = dao.findCrewMember(name);
+        CrewMember member = dao.find(name);
 
         if (member != null)
             member.getRoles().remove(role);
@@ -58,6 +58,6 @@ public class CrewMemberServiceStandard implements CrewMemberService {
     @Override
     @Transactional(readOnly = true)
     public List<CrewMember> getMembers() {
-        return dao.getAllCrewMembers();
+        return dao.findAll();
     }
 }

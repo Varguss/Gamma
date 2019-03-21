@@ -1,16 +1,10 @@
 package ru.gamma_station.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Role;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 import ru.gamma_station.dao.DAOException;
 import ru.gamma_station.dao.VisitorDAO;
 import ru.gamma_station.domain.CrewMember;
@@ -24,7 +18,6 @@ import ru.gamma_station.service.CrewMemberService;
 import ru.gamma_station.service.PostService;
 import ru.gamma_station.service.RuleService;
 
-import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
 import java.util.*;
 
@@ -184,14 +177,14 @@ public class AdminController {
 
     @PostMapping("/addPost")
     public String addPost(@RequestParam(name = "content") String content, @RequestParam(name = "author") String author) {
-        postService.addPost(author, content);
+        postService.save(author, content);
 
-        return "redirect:/admin?addPost=successful";
+        return "redirect:/admin?save=successful";
     }
 
     @PostMapping("/removePost")
     public String removePost(@RequestParam(name = "postId") Long postId) {
-        postService.deletePost(postId);
+        postService.delete(postId);
 
         return "redirect:/admin?removePost=successful";
     }
@@ -199,9 +192,9 @@ public class AdminController {
     @PostMapping("/editPost")
     public String editPost(@RequestParam(name = "postId") Long postId,
                            @RequestParam(name = "content") String content) {
-        postService.editPost(postId, content);
+        postService.edit(postId, content);
 
-        return "redirect:/admin?editPost=successful";
+        return "redirect:/admin?edit=successful";
     }
 
     @PostMapping("/addRule")

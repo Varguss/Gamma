@@ -15,7 +15,7 @@
     <meta charset="UTF-8"/>
 
     <link rel="stylesheet" type="text/css" href="https://cdnjs.com/libraries/10up-sanitize.css"/>
-    <link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/dropdown.css"/>"/>
+    <link rel="stylesheet" type="text/css" href="<c:url value="/WEB-INF/resources"/>"/>
 </head>
 
 <body>

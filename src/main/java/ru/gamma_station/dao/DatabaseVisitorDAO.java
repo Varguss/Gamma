@@ -1,6 +1,7 @@
 package ru.gamma_station.dao;
 
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -20,8 +21,8 @@ public class DatabaseVisitorDAO implements VisitorDAO, InitializingBean {
     private DataSource dataSource;
     private JdbcTemplate jdbcTemplate;
 
-    public DatabaseVisitorDAO(DataSource dataSource) {
-        setDataSource(dataSource);
+    public DatabaseVisitorDAO(@Qualifier("gammaDataSource") DataSource gammaDataSource) {
+        setDataSource(gammaDataSource);
     }
 
     public void setDataSource(DataSource dataSource) {

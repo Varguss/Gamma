@@ -14,8 +14,6 @@ import org.springframework.stereotype.Component;
 import ru.gamma_station.service.PostService;
 import ru.gamma_station.util.MarkdownUtil;
 
-import java.util.List;
-
 @Component
 public class MessageListener extends ListenerAdapter implements InitializingBean {
     private PostService postService;
@@ -39,7 +37,7 @@ public class MessageListener extends ListenerAdapter implements InitializingBean
         if (serverName.equals("GammaStation Official") || serverName.equals("Discordia")) {
             if (channel.getType() == ChannelType.TEXT) {
                 if (channel.getName().equals("testing-bay") || channel.getName().equals("news") || channel.getName().equals("devblog")) {
-                    postService.addDiscordPost(event.getAuthor().getName(), MarkdownUtil.translateMarkdownTextToHTML(event.getMessage().getContentRaw()), event.getMessageIdLong());
+                    postService.saveDiscordPost(event.getAuthor().getName(), MarkdownUtil.translateMarkdownTextToHTML(event.getMessage().getContentRaw()), event.getMessageIdLong());
                 }
             }
         }
